@@ -37,16 +37,26 @@ def preprocess(words_file = "../tools/word_data.pkl", authors_file="../tools/ema
 
 
     ### text vectorization--go from strings to lists of numbers
+    # max_df = 0.5, if a word occurs in 50% of the documents, than ignore it
     vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5,
                                  stop_words='english')
+    
+    # Learn vocabulary and idf, return term-document matrix
+    # This is equivalent to fit followed by transform, but more efficiently
+    # implemented    
     features_train_transformed = vectorizer.fit_transform(features_train)
+    
+    # Transform documents to document-term matrix.
+    # Uses the vocabulary and document frequencies (df) learned by fit
+    # (or fit_transform).
+
     features_test_transformed  = vectorizer.transform(features_test)
 
 
 
     ### feature selection, because text is super high dimensional and 
     ### can be really computationally chewy as a result
-    selector = SelectPercentile(f_classif, percentile=10)
+    selector = SelectPercentile(f_classif, percentile=1)
     selector.fit(features_train_transformed, labels_train)
     features_train_transformed = selector.transform(features_train_transformed).toarray()
     features_test_transformed  = selector.transform(features_test_transformed).toarray()

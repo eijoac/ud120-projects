@@ -6,8 +6,12 @@ numpy.random.seed(42)
 
 
 ### the words (features) and authors (labels), already largely processed
-words_file = "word_data_overfit.pkl" ### like the file you made in the last mini-project 
-authors_file = "email_authors_overfit.pkl"  ### this too
+words_file = "../text_learning/your_word_data.pkl"
+authors_file = "../text_learning/your_email_authors.pkl"
+
+# words_file = "word_data_overfit.pkl" ### like the file you made in the last mini-project 
+# authors_file = "email_authors_overfit.pkl"  ### this too
+
 word_data = pickle.load( open(words_file, "r"))
 authors = pickle.load( open(authors_file, "r") )
 
@@ -21,19 +25,47 @@ features_train, features_test, labels_train, labels_test = cross_validation.trai
 from sklearn.feature_extraction.text import TfidfVectorizer
 vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5,
                              stop_words='english')
-features_train = vectorizer.fit_transform(features_train).toarray()
-features_test  = vectorizer.transform(features_test).toarray()
 
+# features_train = vectorizer.fit_transform(features_train).toarray()
+features_train = vectorizer.fit_transform(features_train)[:150].toarray()
+# features_test  = vectorizer.transform(features_test).toarray()
+features_test  = vectorizer.transform(features_test).toarray()
 
 ### a classic way to overfit is to use a small number
 ### of data points and a large number of features
 ### train on only 150 events to put ourselves in this regime
-features_train = features_train[:150]
+# features_train = features_train[:150]
 labels_train   = labels_train[:150]
 
 
-
 ### your code goes here
+from sklearn import tree
+# clf = tree.DecisionTreeClassifier(min_samples_split = 50)
+clf = tree.DecisionTreeClassifier()
+clf = clf.fit(features_train, labels_train)
+pred = clf.predict(features_test)
+
+from sklearn.metrics import accuracy_score
+acc = accuracy_score(pred, labels_test)
+print "accuracy = %.3f" %acc
+print clf.feature_importances_.shape
+
+
+count = -1
+for x in clf.feature_importances_:
+    count = count + 1
+    if x > 0.2:
+        print "feature importance", x
+        print "number of this feature", count
+        
+# numpy.where(clf.feature_importances_ == x)
+        
+
+importance = clf.feature_importances_
+posi = importance.argmax()
+print "importance of the most important & its position: ", importance[posi], posi
+
+print "feature name: ", vectorizer.get_feature_names()[posi] 
 
 
 
