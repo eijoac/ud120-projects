@@ -87,6 +87,5 @@ exercised_stock_options_list = []
 for key in enron_data:
     exercised_stock_options_list.append(enron_data[key]['exercised_stock_options'])
 print sorted(exercised_stock_options_list)
-    
-
+print len(exercised_stock_options_list)    
 

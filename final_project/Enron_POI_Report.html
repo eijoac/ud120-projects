@@ -1,0 +1,681 @@
+﻿<!DOCTYPE HTML>
+<!DOCTYPE html PUBLIC "" ""><HTML><HEAD><META content="IE=11.0000" 
+http-equiv="X-UA-Compatible">
+ <TITLE>Enron_POI_Report</TITLE> 
+<META http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<STYLE type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</STYLE>
+ 
+<META name="GENERATOR" content="MSHTML 11.00.9600.17690"></HEAD> 
+<BODY>
+<H2>Enron POI Identifier Project / Intro to Machine Learning</H2>
+<P><STRONG>Jie Cao</STRONG></P>
+<H3>1. Introduction</H3>
+<P>The Enron scandal in early 2000 led to one of the largest corporate fraud 
+cases in American history (<A 
+href="http://en.wikipedia.org/wiki/Enron_scandal">see here</A>). In this 
+project, using email and financial data for 145 executives at Enron, I applied 
+machine learning techniques to identify persons of interest in the Enron case. A 
+person of interest (POI) is defined as someone who was indicated for fraud, 
+settled with the government, or testified in exchange for immunity. This report 
+documents the processes of building the POI identifier.</P>
+<H3>2. The Enron Data</H3>
+<P>The Enron data set for this analysis is provided by Udacity and is assembled 
+using raw data from three sources:  <A href="http://usatoday30.usatoday.com/money/industries/energy/2005-12-28-enron-participants_x.htm">the 
+POI data</A>, <A href="http://www.cs.cmu.edu/~./enron/">the email data</A>, and 
+<A href="http://fl1.findlaw.com/news.findlaw.com/hdocs/docs/enron/enron61702insiderpay.pdf">the 
+financial data</A>. Thanks, Udacity!</P>
+<H4>2.1 Variables in the data set</H4>
+<P>The data set contains three major types of variables.</P>
+<UL>
+  <LI>
+  <P>financial features: ['salary', 'deferral_payments', 'total_payments', 
+  'loan_advances', 'bonus', 'restricted_stock_deferred', 'deferred_income', 
+  'total_stock_value', 'expenses', 'exercised_stock_options', 'other', 
+  'long_term_incentive', 'restricted_stock', 'director_fees']  (all units are in 
+  US dollars)</P></LI>
+  <LI>
+  <P>email features: ['to_messages', 'email_address', 'from_poi_to_this_person', 
+  'from_messages', 'from_this_person_to_poi', 'poi', 'shared_receipt_with_poi'] 
+  (units are generally number of emails messages; notable exception is 
+  ‘email_address’, which is a text string)</P></LI>
+  <LI>
+  <P>POI label: [‘poi’] (boolean, represented as integer)</P></LI></UL>
+<H4>2.2 Errors in the financial data</H4>
+<P>While processing the data, I found that financial data for 'BELFER ROBERT' 
+are full of errors. I manually corrected them. These errors were found after I 
+constructed a new feature, 'fraction_exercised_stock'. When I plotted it, an 
+obvious error showed up on the plot, a negative value for 
+'fraction_exercised_stock'. After I investigated the data further, I found the 
+errors are from the data point 'BELFER ROBERT' and it also contains more errors. 
+(See section 3 for the new feature; the plot is omitted in this report.)</P>
+<H4>2.3 Outlier</H4>
+<P>The original data set contains an outlier (found in the mini-project 7), 
+which corresponds to a summary line in the financial data spreadsheet. The 
+outlier was removed at the beginning of the analysis. No other outliers were 
+found in the data set.</P>
+<P>After removing the outlier, there are in total 145 executives in the data, 
+and among them 18 are POIs.</P>
+<H3>3. Feature Processing</H3>
+<P>I created 4 new features that may potentially be useful for identifying the 
+POIs.</P>
+<UL>
+  <LI>'fraction_from_poi': emails from poi to this person as a fraction of total 
+  emails to this person</LI>
+  <LI>'fraction_to_poi': emails from this person to poi as a fraction of total 
+  emails from this person</LI>
+  <LI>'fraction_shared_receipt_with_poi': emails shared receipt with poi as a 
+  fraction of total emails to this person</LI>
+  <LI>'fraction_exercised_stock': exercised stock options as a fraction of total 
+  stock value</LI></UL>
+<P>The idea behind the first 3 new features is that those who have large 
+proportions of emails to/from/shared-receipt-with known POIs may be POIs 
+themselves as they may collude through emails. The idea behind the last new 
+feature is also intuitive. One would expect POIs were insiders that knew what's 
+going on and when things went wrong they should be the ones to first exercise 
+their stock options to cash out ahead of the crash of the Enron stock.</P>
+<H3>4. Feature Selection, Algorithm Selection and Tuning</H3>
+<P>I used two approaches to select features to be fed to the classifier: (1) 
+intuition and trial and error; and (2) feature selection algorithm, in 
+particular, SelectKBest(). For selecting classifiers, I tried many classifiers 
+and compared their performances. The classifiers I tried are Naive Bayes, 
+Support Vector Classifier, Decision Tree,  Random Forest and Ada Boost.</P>
+<P>In this report, I present two final algorithms that both meet the required 
+performance. One uses intuition, trial and error to select the features and uses 
+Decision Tree as the classifier. The other uses SelectKBest() to select features 
+and Naive Bayes as the classifier. The first algorithm is the preferred one. The 
+reason to present the second algorithm is discussed below. I will also briefly 
+discuss why other classifiers I tried are not chosen as preferred 
+algorithms.</P>
+<H4>4.1 Trial and error feature selection &amp; Decision Tree classifier</H4>
+<P>It's impossible to manually try every combinations of even a small set of 
+features. Therefore, first, I used some intuitions and the graphs we did during 
+the mini-projects to identify a few potentially important features. They are 
+'salary', 'total_payments', 'total_stock_value', 'exercised_stock_options', 
+'fraction_exercised_stock', 'fraction_from_poi', and 'fraction_to_poi'. Second, 
+I tried some combinations of 1, 2 or all of them with a few classifiers 
+mentioned above. Last I chose the algorithm with the best performance. </P>
+<P>I found that the feature 'exercised_stock_options' together with the Decision 
+Tree classifier delivers good performance. The intuition behind the 
+'exercised_stock_options' is similar to the one of 'fraction_exercised_stock' as 
+already discussed in the previous section: POIs were insiders that knew what 
+went wrong so they may cash out before stock market crash. Therefore, One would 
+expect 'exercised_stock_options' to contain useful "information".</P>
+<P>As I will discuss in section 4.3, combining 'exercised_stock_options' with 
+'fraction_exercised_stock' or using 'fraction_exercised_stock' alone with 
+Decision Tree also deliver quite good performance. My final preferred feature 
+set contains the single feature 'exercised_stock_options' for reasons to be 
+discussed.</P>
+<P>I tuned the parameter min_samples_split for the Decision Tree classifier, I 
+chose the parameter to be 80 which gives the best performance among parameters 
+tried. I will interpret the evaluation measures under this parameter value in 
+the next section. For now, simply notice the tradeoff between precision and 
+recall, although the change of recall is tiny especially when min_samples_split 
+is less than 80.</P>
+<P>Table 1. Tuning the parameter <CODE>min_samples_split</CODE> in 
+DecisionTreeClassifier().</P>
+<TABLE>
+  <THEAD>
+  <TR>
+    <TH align="center"><CODE>min_samples_split</CODE></TH>
+    <TH align="center">average precision</TH>
+    <TH align="center">average recall</TH>
+    <TH align="center">average F1</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD align="center">10</TD>
+    <TD align="center">0.65415</TD>
+    <TD align="center">0.57500</TD>
+    <TD align="center">0.61203</TD></TR>
+  <TR>
+    <TD align="center">30</TD>
+    <TD align="center">0.78347</TD>
+    <TD align="center">0.57350</TD>
+    <TD align="center">0.66224</TD></TR>
+  <TR>
+    <TD align="center">50</TD>
+    <TD align="center">0.84900</TD>
+    <TD align="center">0.57350</TD>
+    <TD align="center">0.68457</TD></TR>
+  <TR>
+    <TD align="center">70</TD>
+    <TD align="center">0.87557</TD>
+    <TD align="center">0.57350</TD>
+    <TD align="center">0.69305</TD></TR>
+  <TR>
+    <TD align="center"><STRONG>80</STRONG></TD>
+    <TD align="center"><STRONG>0.87893</STRONG></TD>
+    <TD align="center"><STRONG>0.57350</STRONG></TD>
+    <TD align="center"><STRONG>0.69410</STRONG></TD></TR>
+  <TR>
+    <TD align="center">90</TD>
+    <TD align="center">0.89704</TD>
+    <TD align="center">0.44000</TD>
+    <TD align="center">0.59041</TD></TR>
+  <TR>
+    <TD align="center">95</TD>
+    <TD align="center">0.98997</TD>
+    <TD align="center">0.34550</TD>
+    <TD align="center">0.51223</TD></TR>
+  <TR>
+    <TD align="center">100</TD>
+    <TD align="center">*</TD>
+    <TD align="center">*</TD>
+    <TD align="center">*</TD></TR></TBODY></TABLE>
+<P>* when <CODE>min_samples_split = 100</CODE>, I got exception error "Got a 
+divide by zero when trying out: ..."</P>
+<P>Since when <CODE>min_samples_split = 80</CODE>, the precision and recall are 
+relatively high, and in addition the F1 score is also the highest, which implies 
+a high "average" of precision and recall and a good balance of the two, this 
+(80) is the choice of the value to set for the parameter. (Note that the 
+precision or the recall when <CODE>min_samples_split = 80</CODE> are not the 
+highest among all parameter tried.)</P>
+<P>The performance seems a bit too good, so I was cautious about any potential 
+bugs. I did three things to double check the results.</P>
+<OL>
+  <LI>
+  <P>I checked the number of data points and POIs after the feature selection. 
+  There are 106 data points after feature selection and 18 POIs. The loss of 
+  data points is due to the fact that some executives don't have the data for 
+  'exercised_stock_options' (NaN). The good news is that all the POIs 
+  remains.</P></LI>
+  <LI>
+  <P>I plotted the feature 'exercised_stock_options' to see if there is anything 
+  abnormal (see below). I didn't see anything wrong.<IMG alt="alt text" src="Enron_POI_Report_files/exercised_stock_options_plot.png"> 
+  <IMG alt="alt text" src="Enron_POI_Report_files/exercised_stock_options_plot_02.png"> 
+  </P></LI>
+  <LI>
+  <P>I also plotted the graph for decision tree (The graph is not shown here. I 
+  trained algorithm using the full data set for the plot. It was a first pass 
+  check), and I didn't see anything wrong. </P></LI></OL>
+<H4>4.2 SelectKBest() &amp; Naive Bayes classifier</H4>
+<P>In the Udacity sample report, Naive Bayes classifier is abandoned due to its 
+biased prediction. I choose to report my result on Naive Bayes classifier to 
+show that it works just fine and it meets the requirement if combining with 
+SelectKBest(). The performance of this algorithm is not as good as the previous 
+one, so it's not my preferred final algorithm.</P>
+<P>SelectKBest() is used to selected the features and Naive Bayes classifier is 
+used as the classifier. I "pipelined" the two steps, and both SelectKBest() and 
+Naive Bayes are parts of the algorithm to be evaluated. Hence the chained two 
+steps are both trained over the training set. Note that it is a good practice to 
+apply the selection algorithm over the training set. Otherwise the evaluation 
+may be biased (<A href="http://nbviewer.ipython.org/github/jming/cs109/blob/master/lec_10_cross_val.ipynb">see 
+here</A>).</P>
+<P>The parameter to tune here is the number of features to selection, k. The 
+result of tuning is presented in the table below. The preferred k is 5. The 
+choice is obvious as it gives the highest precision, recall and F1.</P>
+<P>Table 2. Tuning the parameter <CODE>k</CODE> in SelectKBest()</P>
+<TABLE>
+  <THEAD>
+  <TR>
+    <TH align="center"><CODE>k</CODE></TH>
+    <TH align="center">average precision</TH>
+    <TH align="center">average recall</TH>
+    <TH align="center">average F1</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD align="center">3</TD>
+    <TD align="center">0.31186</TD>
+    <TD align="center">0.22750</TD>
+    <TD align="center">0.26308</TD></TR>
+  <TR>
+    <TD align="center">4</TD>
+    <TD align="center">0.37095</TD>
+    <TD align="center">0.28600</TD>
+    <TD align="center">0.32298</TD></TR>
+  <TR>
+    <TD align="center"><STRONG>5</STRONG></TD>
+    <TD align="center"><STRONG>0.42036</STRONG></TD>
+    <TD align="center"><STRONG>0.33650</STRONG></TD>
+    <TD align="center"><STRONG>0.37379</STRONG></TD></TR>
+  <TR>
+    <TD align="center">6</TD>
+    <TD align="center">0.38557</TD>
+    <TD align="center">0.31000</TD>
+    <TD align="center">0.34368</TD></TR>
+  <TR>
+    <TD align="center">7</TD>
+    <TD align="center">0.38025</TD>
+    <TD align="center">0.30800</TD>
+    <TD align="center">0.34033</TD></TR></TBODY></TABLE>
+<P>Since the feature selection algorithm is applied to the training set, 
+features chosen depend on the training and testing set split. Hence, here I 
+present the ranked frequency count of features chosen as a fraction of total 
+number of validation iterations (under the chosen parameter 
+<CODE>k=5</CODE>).</P>
+<PRE><CODE>Total number of validations:  1000.0
+
+Frequency count for features selected (fraction of totoal # of validation)
+--------------------------------------------------------------------------
+poi : 1.0
+total_stock_value : 0.988
+bonus : 0.971
+exercised_stock_options : 0.97
+salary : 0.883
+fraction_to_poi : 0.774
+deferred_income : 0.232
+long_term_incentive : 0.073
+restricted_stock : 0.057
+fraction_shared_receipt_with_poi : 0.038
+shared_receipt_with_poi : 0.01
+from_poi_to_this_person : 0.002
+expenses : 0.002
+-------------------------------------
+</CODE></PRE>
+<P>I comment three points for the frequency count.</P>
+<OL>
+  <LI>The 'poi' is the label.</LI>
+  <LI>Financial features are chosen most of the time and email related features 
+  are not chosen often by the algorithm.</LI>
+  <LI>Frequency count may not reflect the importance of the features 
+  selected.</LI></OL>
+<H4>4.3 Other features &amp; classifiers</H4>
+<P>I this section, I briefly discuss a few other features and classifiers I 
+tried, and why I didn't choose them as the final preferred algorithms.</P>
+<P>As mentioned in section 4.1, combining 'exercised_stock_options' with 
+'fraction_exercised_stock' or using 'fraction_exercised_stock' alone with 
+Decision Tree also deliver quite good performance. For example, using 
+'fraction_exercised_stock' alone and Decision Tree with parameter 
+<CODE>min_samples_split = 80</CODE>, I obtained an average precision of 1.00000 
+and an average recall of 0.32600. Thus, this is a very conservative algorithm 
+that is rarely wrong when it flags a POI, but quite often misses flagging true 
+POIs. However, the main criteria I use to choose my preferred algorithm is not 
+just precision or recall. It is both of them and their overall "average" as 
+reflected in the F1 score, which takes into account of both precision and recall 
+to indicate how the algorithm is reliable and accurate. In this case, the F1 
+score is only 0.49170, lower than the preferred case in section 4.1.</P>
+<P>Combining 'exercised_stock_options' with 'fraction_exercised_stock' and using 
+Decision Tree gives only sightly worse (very close) performance than the 
+preferred one. Using Random Forrest with the above two features combined or 
+alone also deliver very similar performance. I chose my preferred algorithm for 
+its slightly better performance and its simplicity</P>
+<P>When using the feature selection algorithm (approach 2), I also tried varies 
+classifiers, they don't seem to deliver as good performance as my preferred one. 
+Hence they are not chosen.</P>
+<H3>5. Analysis Validation and Performance</H3>
+<P>Because of the small size of the data set, the algorithm is validated using 
+stratified shuffle split cross validation. The number of iterations/folds is 
+1000.</P>
+<P>In this section, I interpret the result of 'exercised_stock_options' and 
+Decision Tree algorithm (<CODE>min_samples_split = 80</CODE>). (See section 4.1 
+and table 1). Discussion on  result of SelectKBest() and Naive Bayes is similar, 
+and hence omitted.</P>
+<P>First I reproduce the evaluation scores in the following table (adding also a 
+few other measurements).</P>
+<P>Table 3. Evaluation scores; feature: 'exercised_stock_options'; classifier: 
+Decision Tree; Parameter: <CODE>min_samples_split = 80</CODE></P>
+<TABLE>
+  <THEAD>
+  <TR>
+    <TH align="center">measurement</TH>
+    <TH align="center">average value</TH></TR></THEAD>
+  <TBODY>
+  <TR>
+    <TD align="center">precision</TD>
+    <TD align="center">0.87893</TD></TR>
+  <TR>
+    <TD align="center">recall</TD>
+    <TD align="center">0.57350</TD></TR>
+  <TR>
+    <TD align="center">F1</TD>
+    <TD align="center">0.69410</TD></TR>
+  <TR>
+    <TD align="center">F2</TD>
+    <TD align="center">0.61634</TD></TR>
+  <TR>
+    <TD align="center"></TD>
+    <TD align="center"></TD></TR>
+  <TR>
+    <TD align="center">total predictions</TD>
+    <TD align="center">11000</TD></TR>
+  <TR>
+    <TD align="center">true positives</TD>
+    <TD align="center">1147</TD></TR>
+  <TR>
+    <TD align="center">false positives</TD>
+    <TD align="center">158</TD></TR>
+  <TR>
+    <TD align="center">false negatives</TD>
+    <TD align="center">853</TD></TR>
+  <TR>
+    <TD align="center">true negatives</TD>
+    <TD align="center">8842</TD></TR></TBODY></TABLE>
+<P>When taking <CODE>min_samples_split = 80</CODE>, the algorithm achieves a 
+precision of 0.89893 and a recall of 0.57350. They are both quite good. 
+Precision measures the probability of a person being a true POI given the person 
+is flagged as a POI by the algorithm. My near 0.9 precision score means that 
+whenever a person gets flagged as a POI in the test set, I am very confident 
+that the person is likely a real POI and the flag is not a false alarm.</P>
+<P>Recall measures the probability that a person will be flagged as a POI given 
+the person is a true POI. My recall of 0.57 means whenever a POI shows up in my 
+test set, with above half chance the algorithm will identify the person.</P>
+<P>F1 score takes into account both precision and recall. (It takes the harmonic 
+mean of recall and precision <CODE>F1 = 2 * (recall * precision) / (recall + 
+precision)</CODE>) It means both the false positive rate and false negative rate 
+are not too high, and the algorithm has an overall good performance.</P>
+<P>F2 score is similar to F1, but weights recall higher than precision. Hence my 
+F2 score is a bit lower than F1 but not too bad.</P>
+<P>There is usually a tradeoff between precision and recall. When choosing an 
+algorithm, I aim for high precision and recall as well as balance (i.e. the F1 
+score). An extreme conservative or trigger-happy algorithm is not what I aim 
+for.</P>
+<H3>6. Discussion, Conclusion &amp; Reflection</H3>
+<P>In this report, I documented the process of building a POI identifier for the 
+Enron case. The preferred algorithm only uses one feature and a simple Decision 
+Tree classifier. However, it achieves a reasonable good performance.</P>
+<P>There are certain steps of the process I can do better. First, although I 
+found some errors in the data set and corrected them, I didn't thoroughly audit 
+the data. The data may contain more errors. Second, while I chose the Decision 
+Tree classifier as the preferred algorithm, I only tuned one of its parameters. 
+Tuning more parameters using GridCV() may help bring up the performance. </P>
+<P>In addition, looking at the fundamentals, there are more I can do to 
+potentially obtain a better algorithm. First, as pointed out in the sample 
+report. There were 35 POIs identified in the "real life", but only 18 of them 
+are in the data set. Finding data for the other POIs and add them to the current 
+data set sure will improve the accuracy of the algorithm.</P>
+<P>Second, as also pointed out in the sample report, there is a big email data 
+set available. While we used some information in the email data set, it didn't 
+really play a big role in the final algorithm chosen. Potential, the text data 
+of the email may contain important information. Natural Language Processing and 
+Principal Component Analysis could be applied to the email text message to see 
+if we can find more "information" for the identification algorithm.</P>
+<P>Personally I learned a lot from this project as well as the intro course 
+itself. I like the course's balance between the theory, intuition and 
+application. Since it is an intro course, I am very happy to see it leans 
+towards intuition and hands-on practices. I can always look up the detailed 
+theory if I want to, but to get started, gaining good intuitions and doing 
+projects are the way to go. As I enjoyed the project so much, I found myself 
+spend a bit too much time on it during the day time while I was supposed to do 
+something else. While the course gets me interested in Machine Learning, I sure 
+know that what I've seen so far is just the tip of the iceberg. I will continue 
+to learn this subject and to discover its potential applications on my own 
+work.</P></BODY></HTML><!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
